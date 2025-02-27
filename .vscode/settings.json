@@ -1,0 +1,238 @@
+{
+    "editor.semanticTokenColorCustomizations": {
+      "[GitHub Light]": {
+        "enabled": true,
+        "rules": {
+          "class": {
+            "foreground": "#BF3989"
+          },
+          "interface": {
+            "foreground": "#6f42c1"
+          },
+          "type": {
+            "foreground": "#BF3989"
+          },
+          "enum": {
+            "foreground": "#BF3989"
+          },
+          "property": {
+            "foreground": "#109c00"
+          },
+          "function": {
+            "foreground": "#6f42c1"
+          },
+          "clsParameter": {
+            "foreground": "#e36209",
+            "fontStyle": "italic"
+          },
+          "selfParameter": {
+            "foreground": "#e36209",
+            "fontStyle": "italic"
+          },
+          "typeParameter": {
+            "foreground": "#e36209"
+          },
+          "magicFunction": {
+            "foreground": "#BF3989"
+          },
+          "razorTagHelperAttribute": {
+            "foreground": "#d73a49",
+            "fontStyle": ""
+          },
+          "razorTagHelperElement": {
+            "foreground": "#d73a49",
+            "fontStyle": ""
+          },
+          "razorComponentAttribute": {
+            "foreground": "#d73a49",
+            "fontStyle": ""
+          },
+          "razorComponentElement": {
+            "foreground": "#d73a49",
+            "fontStyle": ""
+          },
+          "xmlDocCommentName": {
+            "foreground": "#22863A"
+          }
+        }
+      },
+      "[GitHub Dark]": {
+        "enabled": true,
+        "rules": {
+          "class": {
+            "foreground": "#f183c5"
+          },
+          "interface": {
+            "foreground": "#f183c5"
+          },
+          "type": {
+            "foreground": "#f183c5"
+          },
+          "enum": {
+            "foreground": "#f183c5"
+          },
+          "property": {
+            "foreground": "#B7DC6F"
+          },
+          "clsParameter": {
+            "foreground": "#ffab70",
+            "fontStyle": "italic"
+          },
+          "selfParameter": {
+            "foreground": "#ffab70",
+            "fontStyle": "italic"
+          },
+          "typeParameter": {
+            "foreground": "#ffab70"
+          },
+          "magicFunction": {
+            "foreground": "#f183c5"
+          },
+          "razorTagHelperAttribute": {
+            "foreground": "#f97583"
+          },
+          "razorTagHelperElement": {
+            "foreground": "#f97583"
+          },
+          "razorComponentAttribute": {
+            "foreground": "#f97583"
+          },
+          "razorComponentElement": {
+            "foreground": "#f97583",
+            "fontStyle": ""
+          },
+          "xmlDocCommentName": {
+            "foreground": "#85E89D"
+          }
+        }
+      },
+      "[Flatland Monokai]": {
+        "enabled": true,
+        "rules": {
+          "typeParameter": "#FD971F",
+          "interface": {
+            "foreground": "#A6E22E",
+            "fontStyle": "underline",
+          }
+        }
+      }
+    },
+    "editor.tokenColorCustomizations": {
+      "[GitHub Light]": {
+        "textMateRules": [
+          {
+            "scope": [
+              "string",
+              "punctuation.definition.string",
+              "string punctuation.section.embedded source"
+            ],
+            "settings": {
+              "foreground": "#003470"
+            }
+          },
+          {
+            "scope": [
+              "source.tsx meta.var.expr.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx",
+              "support.class.component.tsx"
+            ],
+            "settings": {
+              "foreground": "#BF3989"
+            }
+          }
+        ]
+      },
+      "[GitHub Dark]": {
+        "textMateRules": [
+          {
+            "scope": [
+              "string",
+              "punctuation.definition.string",
+              "string punctuation.section.embedded source"
+            ],
+            "settings": {
+              "foreground": "#fff08f"
+            }
+          },
+          {
+            "scope": [
+              "entity.name.type.cs"
+            ],
+            "settings": {
+              "foreground": "#f183c5"
+            }
+          },
+          {
+            "scope": [
+              "source.tsx meta.function.tsx meta.block.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx",
+              "support.class.component.tsx"
+            ],
+            "settings": {
+              "foreground": "#f183c5"
+            }
+          },
+          {
+            "scope": [
+              "source.tsx meta.var.expr.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx"
+            ],
+            "settings": {
+              "foreground": "#f183c5"
+            }
+          }
+        ]
+      },
+      "[Flatland Monokai]": {
+        "textMateRules": [
+          {
+            "scope": [
+              "source.tsx meta.interface.tsx storage.type.interface.tsx",
+            ],
+            "settings": {
+              "foreground": "#F92672"
+            }
+          },
+          {
+            "scope": [
+              "source.tsx meta.var.expr.tsx storage.type.tsx",
+              "storage.type.type.tsx",
+              "storage.type.class.ts",
+              "storage.type.type.ts",
+              "storage.type.ts",
+              "support.type.primitive.ts"
+            ],
+            "settings": {
+              "foreground": "#F92672"
+            }
+          },
+          {
+            "scope": [
+              "variable.language.this.ts",
+            ],
+            "settings": {
+              "foreground": "#FD971F"
+            }
+          },
+          {
+            "scope": [
+              "entity.name.type.alias.ts",
+              "entity.name.type.class.ts",
+              "entity.other.inherited-class.ts",
+              "variable.language.super.ts"
+            ],
+            "settings": {
+              "foreground": "#66D9EF"
+            }
+          },
+        ]
+      },
+    },
+    "workbench.colorCustomizations": {
+      "[GitHub Light]": {
+        "textCodeBlock.background": "#e8e8e8",
+      }
+    },
+    "editor.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
+    "editor.fontWeight": "375",
+    "editor.rulers": [95],
+    "terminal.integrated.fontWeight": "375",
+    "editor.inlineSuggest.enabled": false
+}
