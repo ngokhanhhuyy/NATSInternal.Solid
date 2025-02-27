@@ -15,7 +15,7 @@ const SignInButton = (props: SignInButtonProps) => {
             <button class="btn btn-dark w-100"
                     disabled={props.isDisabled}
                     onClick={props.onClick}>
-                <Show when={props.isSubmitting} fallback={<span>Login</span>}>
+                <Show when={props.isSubmitting} fallback={<span>Đăng nhập</span>}>
                     <span class="spinner-border spinner-border-sm" aria-hidden="true" />
                 </Show>
             </button>

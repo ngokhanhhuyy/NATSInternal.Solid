@@ -19,6 +19,7 @@
         "@rsbuild/core": "^1.2.8",
         "@rsbuild/plugin-babel": "^1.0.3",
         "@rsbuild/plugin-solid": "^1.0.4",
+        "@types/node": "^22.13.5",
         "eslint": "^9.21.0",
         "globals": "^16.0.0",
         "typescript": "^5.7.3",

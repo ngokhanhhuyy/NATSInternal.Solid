@@ -102,8 +102,8 @@ export interface ModelStateOptions {
     isValidated?: boolean;
 }
 
-export function createModelState(options?: ModelStateOptions): IModelState {
-    const [getErrorsState, setErrorsState] = createSignal(options?.errors ?? {});
+export function createModelState(): IModelState {
+    const [getErrorsState, setErrorsState] = createSignal<IModelStateErrors>({});
     const [isValidated, setValidated] = createSignal<boolean>(false);
 
     return {
@@ -112,8 +112,8 @@ export function createModelState(options?: ModelStateOptions): IModelState {
         },
 
         get isValid(): boolean {
-            if (options?.isValidated) {
-                return options.errors == null || Object.keys(options.errors).length === 0;
+            if (isValidated()) {
+                return Object.keys(getErrorsState()).length === 0;
             }
 
             return true;

@@ -64,8 +64,6 @@ html {
 
 body {
     height: 100%;
-    color: var(--color-text);
-    background: var(--color-background);
     scrollbar-width: none;
     overflow: auto;
     transition:
@@ -85,7 +83,6 @@ body {
         "Droid Sans",
         "Helvetica Neue",
         sans-serif;
-    font-size: 14px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

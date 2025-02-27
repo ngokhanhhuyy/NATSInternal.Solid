@@ -1,7 +1,14 @@
 import { createSignal, Show } from "solid-js";
+import { useNavigate, useParams } from "@solidjs/router";
 import { SignInModel } from "@/models/signIn/signInModel";
 import { createModelState } from "@/hooks/modelStateHook";
-// import { useAuthenticationStore } from "@/stores/authenticationStore";
+import { useAuthenticationService } from "@/services/authenticationService";
+import { useAuthenticationStore } from "@/stores/authenticationStore";
+import {
+    BadRequestError,
+    ConnectionError,
+    InternalServerError,
+    OperationError } from "@/errors";
 
 // Child components.
 import Input from "./InputComponent";
@@ -12,13 +19,15 @@ import CommonError from "./CommonErrorComponent";
 // Component.
 const SignInView = () => {
     // Dependencies.
-    // const authenticationStore = useAuthenticationStore();
+    const authenticationStore = useAuthenticationStore();
+    const authenticationService = useAuthenticationService();
+    const params = useParams();
+    const navigate = useNavigate();
 
     // Model and states.
     const [getModel, setModel] = createSignal(new SignInModel());
     const [getCommonError, setCommonError] = createSignal<string | null>(null);
     const [isSignedIn, setSignedIn] = createSignal<boolean>(false);
-    // const [isInitiallyChecking, setInitiallyChecking] = createSignal<boolean>(true);
     const [isSubmitting, setSubmitting] = createSignal<boolean>(false);
     const modelState = createModelState();
 
@@ -33,13 +42,32 @@ const SignInView = () => {
         setSubmitting(true);
         setCommonError(null);
         modelState.resetErrors();
-
-        if (getModel().userName.toLowerCase() !== "admin") {
-            modelState.setErrors({ userName: ["Username doesn't exist"] });
-        } else if (getModel().password !== "123") {
-            modelState.setErrors({ password: ["Password"] });
-        } else {
+        try {
+            await authenticationService.signInAsync(getModel().toRequestDto());
+            authenticationStore.setAuthenticated();
             setSignedIn(true);
+            setTimeout(() => {
+                if (params.returningPath) {
+                    navigate(params.returningPath);
+                } else {
+                    navigate("/");
+                }
+            }, 1000);
+        } catch (exception) {
+            setModel(getModel().from({ password: "" }));
+            if (exception instanceof BadRequestError ||
+                    exception instanceof OperationError) {
+                modelState.setErrors(exception.errors);
+            } else if (exception instanceof InternalServerError) {
+                setCommonError("Đã xảy ra lỗi từ máy chủ");
+            } else if (exception instanceof ConnectionError) {
+                setCommonError("Không thể kết nối đến máy chủ");
+            } else {
+                setCommonError("Đã xảy ra lỗi không xác định");
+                throw exception;
+            }
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -69,9 +97,7 @@ const SignInView = () => {
                                     }}
                                     propertyName="userName"
                                 />
-                                <label class="text-dark">
-                                    Tên tài khoản
-                                </label>
+                                <label>Tên tài khoản</label>
                             </div>
                             <ValidationMessage name="userName" modelState={modelState} />
                         </div>
@@ -87,9 +113,7 @@ const SignInView = () => {
                                     }}
                                     propertyName="password"
                                 />
-                                <label class="text-dark">
-                                    Mật khẩu
-                                </label>
+                                <label>Mật khẩu</label>
                             </div>
                             <ValidationMessage name="password" modelState={modelState} />
                         </div>

@@ -14,23 +14,13 @@ const ValidationMessage = (props: ValidationMessageProps) => {
         if (!props.modelState) {
             return "";
         }
-
-        let resultName = props.modelState.getMessageClass(props.name) ?? "";
-        if (!props.modelState.hasError(resultName)) {
-            resultName += " d-none";
-        }
-
-        return resultName;
+        return props.modelState.getMessageClass(props.name) ?? "";
     };
 
-    if (!props.modelState) {
-        return null;
-    }
-
     return (
-        <Show when={!props.modelState}>
+        <Show when={props.modelState.hasError(props.name)}>
             <span class={computeClass()}>
-                { props.modelState.getMessage(props.name) }
+                {props.modelState.getMessage(props.name)}
             </span>
         </Show>
     );
