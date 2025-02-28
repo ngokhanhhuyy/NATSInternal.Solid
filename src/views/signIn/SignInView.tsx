@@ -1,4 +1,4 @@
-import { createSignal, Show } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 import { useNavigate, useParams } from "@solidjs/router";
 import { SignInModel } from "@/models/signIn/signInModel";
 import { createModelState } from "@/hooks/modelStateHook";
@@ -19,8 +19,8 @@ import CommonError from "./CommonErrorComponent";
 // Component.
 const SignInView = () => {
     // Dependencies.
-    const authenticationStore = useAuthenticationStore();
     const authenticationService = useAuthenticationService();
+    const authenticationStore = useAuthenticationStore();
     const params = useParams();
     const navigate = useNavigate();
 
@@ -31,6 +31,19 @@ const SignInView = () => {
     const [isSubmitting, setSubmitting] = createSignal<boolean>(false);
     const modelState = createModelState();
 
+    // Effect.
+    createEffect(() => {
+        if (isSignedIn()) {
+            setTimeout(() => {
+                if (params.returningPath) {
+                    navigate(params.returningPath);
+                } else {
+                    navigate("/");
+                }
+            }, 1000);
+        }
+    });
+
     // Computed.
     const isRequiredFieldsFilled = (): boolean => {
         const userNameFilled = getModel().userName.length > 0;
@@ -38,6 +51,7 @@ const SignInView = () => {
         return userNameFilled && passwordFilled;
     };
 
+    // Callbacks.
     const login = async (): Promise<void> => {
         setSubmitting(true);
         setCommonError(null);
@@ -46,13 +60,6 @@ const SignInView = () => {
             await authenticationService.signInAsync(getModel().toRequestDto());
             authenticationStore.setAuthenticated();
             setSignedIn(true);
-            setTimeout(() => {
-                if (params.returningPath) {
-                    navigate(params.returningPath);
-                } else {
-                    navigate("/");
-                }
-            }, 1000);
         } catch (exception) {
             setModel(getModel().from({ password: "" }));
             if (exception instanceof BadRequestError ||

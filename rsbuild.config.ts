@@ -15,5 +15,8 @@ export default defineConfig({
             "/api": "http://localhost:5000",
             "/images": "http://localhost:5000/images"
         }
+    },
+    performance: {
+        buildCache: false
     }
 });

@@ -1,4 +1,4 @@
-import { onMount, JSX } from "solid-js";
+import { createSignal, createEffect, on, onMount, JSX, Suspense } from "solid-js";
 import { useNavigate, useLocation } from "@solidjs/router";
 import { useAuthenticationStore } from "./stores/authenticationStore";
 import "bootstrap";
@@ -28,11 +28,13 @@ const App = (props: AppProps) => {
         }
     });
 
+
     return (
-        <>
-            {JSON.stringify(location.pathname)}<br/>
-            {props.children}
-        </>
+        <div class="container">
+            <Suspense>
+                {props.children}
+            </Suspense>
+        </div>
     );
 };
 
